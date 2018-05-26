@@ -1,7 +1,7 @@
 (function() {
     setInterval(function(){
-        document.getElementById("daya").innerHTML = Math.floor(Math.random()*99)+40;
         document.getElementById("waktu").innerHTML = (new Date()).toLocaleTimeString('en-ID', { hour12: false });
+        // signalData.unshift(Math.floor(Math.random()*99));
     }, 1000);
 
     
@@ -56,10 +56,12 @@
             if (payload == "1") {
                 tombolNyalakan.style.display = 'none';
                 tombolMatikan.style.display = 'block';
+                $("#tombolMatikan").removeClass('disabled');
             } 
             else if (payload == 0) {
                 tombolNyalakan.style.display = 'block';
                 tombolMatikan.style.display = 'none';
+                $("#tombolNyalakan").removeClass('disabled');
             }
         }
     }
@@ -108,12 +110,14 @@
 
     ////////////////////////////////////////////////////////////////////////// setup switch
     var nyalakan = function() {
+        $("#tombolNyalakan").addClass('disabled');
         var message = new Paho.MQTT.Message("1");
         message.destinationName = "mikon/fromServer";
         client.send(message);
     }
 
     var matikan = function() {
+        $("#tombolMatikan").addClass('disabled');
         var message = new Paho.MQTT.Message("0");
         message.destinationName = "mikon/fromServer";
         client.send(message);
@@ -169,16 +173,17 @@
             },
             plugins: {
                 streaming: {
-                    refresh: 1000,
+                    refresh: 350,
                     duration: 30000,
                     frameRate: 30,
-                    delay: 2000,
+                    delay: 600,
                     onRefresh: function(chart) {
+                        let watts = signalData.pop();
                         chart.data.datasets[0].data.push({
                             x: Date.now(),
-                            y: Math.floor(Math.random()*99)
-                            // y: signalData.pop()
+                            y: watts
                         });
+                        daya.innerHTML = (watts ? watts : 0);
                     }
                 }
             }
