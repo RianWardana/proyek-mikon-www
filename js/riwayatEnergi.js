@@ -93,16 +93,17 @@
 
             var secondEpochStart = epochStart;
             var secondEpochEnd = secondEpochStart + 300;
-            var minuteCount = 0;
 
-            for (minuteCount = 0; minuteCount < 288; minuteCount++) {
+            var jumlahMenit = 0;
+            var totalDayaMenitan = 0;
+            var totalEnergi = 0;
+
+            for (var minuteCount = 0; minuteCount < 288; minuteCount++) {
                 dayaRef.orderByKey().startAt(secondEpochStart.toString()).endAt(secondEpochEnd.toString()).once('value', seconds => {
                     if (seconds.val() == null) {
                         myChart.data.labels.push(secondEpochStart);
                         myChart.data.datasets[0].data.push(0);  
-                    } 
-
-                    else {
+                    } else {
                         var count = 0;
                         var totalDaya = 0;
 
@@ -114,14 +115,18 @@
                         var dayaAvg = (totalDaya/count).toFixed(2);
                         myChart.data.labels.push(secondEpochStart);
                         myChart.data.datasets[0].data.push(dayaAvg);
+                        totalDayaMenitan += Number(dayaAvg);
+                        totalEnergi += Number(dayaAvg)/12;
+                        jumlahMenit++;
                     }
                     secondEpochStart += 300;
+                    $("#dayaAvg").html((totalDayaMenitan/(jumlahMenit == 0 ? 1 : jumlahMenit)).toFixed(2));
+                    $("#energiTerpakai").html(totalEnergi.toFixed(2));
+                    myChart.update(0);
                 });
                 secondEpochStart += 300;
                 secondEpochEnd += 300;
             }
-
-            myChart.update(0);
         }
     }
 
