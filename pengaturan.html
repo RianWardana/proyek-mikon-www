@@ -4,7 +4,7 @@
         <meta charset='utf-8'>
         <meta http-equiv='X-UA-Compatible' content='IE=edge'>
         <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
-        <title>Proyek Mikrokontroler: Riwayat</title>
+        <title>Proyek Mikrokontroler: Pengaturan</title>
         <meta name="theme-color" content="#1A385B">
 
 		<!-- CSS -->
@@ -19,34 +19,12 @@
                 font-family: 'Roboto', 'Noto', sans-serif;
                 background-color: #f7f7f7;
             }
-
-			input {
-				padding: 8px;
-				border: 2px solid rgba(52, 152, 219,0.4);
-    			border-radius: 5px;
-			}
-
-			.chartWrapper {
-				position: relative;
-			}
-
-			.chartWrapper > canvas {
-				position: absolute;
-				left: 0;
-				top: 0;
-				pointer-events: none;
-			}
-
-			.chartAreaWrapper {
-				width: 15000px;
-				overflow-x: scroll;
-			}
         </style>
     </head>
 
     <body>
     	<div class="wrapper">
-    		<div class="sidebar" data-color="orange">
+    		<div class="sidebar" data-color="orange"> <!-- SIDEBAR -->
                 <div class="logo">
                     <a href="" class="simple-text logo-normal" style="margin-left:30px;">Proyek Mikrokontroler</a>
                 </div>
@@ -57,13 +35,13 @@
                                 <i class="now-ui-icons business_bulb-63"></i><p>Penggunaan Energi</p>
                             </a>
                         </li>
-                        <li class="active">
-                            <a href="">
+                        <li>
+                            <a href="riwayat.html">
                                 <i class="now-ui-icons media-2_sound-wave"></i><p>Riwayat</p>
                             </a>
                         </li>
-                        <li>
-                            <a href="pengaturan.html">
+                        <li class="active">
+                            <a href="">
                                 <i class="now-ui-icons ui-1_settings-gear-63"></i><p>Pengaturan</p>
                             </a>
                         </li>
@@ -72,7 +50,7 @@
             </div> <!-- END SIDEBAR -->
 
             <div class="main-panel">
-            	<nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
+            	<nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top"> <!-- NAVBAR -->
                     <div class="container-fluid">
                         <div class="navbar-wrapper">
                             <div class="navbar-toggle">
@@ -82,7 +60,7 @@
                                     <span class="navbar-toggler-bar bar3"></span>
                                 </button>
                             </div>
-                            <a class="navbar-brand" href="">Riwayat</a>
+                            <a class="navbar-brand" href="">Pengaturan</a>
                         </div>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -112,95 +90,82 @@
                     </div>
                 </nav> <!-- END NAVBAR -->
 
-            	<div class="panel-header">
-            	    <div class="header text-center">
-            	        <h2 class="title">Riwayat Penggunaan Energi</h2>
-            	        <p class="category">Data penggunaan energi berdasarkan waktu</p>
-            	    </div>
-            	</div>
+                <div class="panel-header panel-header-sm">
+                </div>
 
             	<div class="content">
-            		<div id="grafikPerJam" class="card" style="display:none;">
-                        <div class="card-header">
-                            <h4 id="judulGrafik" class="card-title">Konsumsi daya selama 1 jam</h4>
-                        </div>
-                        <div style="overflow-x: auto">
-                        	<div class="card-body" style="padding: 0px; height: 300px; width: 2000px;">
-                        		<canvas id="myChart"></canvas>
-                        	</div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div id="cardTimePerJam" class="col-lg-4">
-                            <div class="card card-chart">
+                    <div class="row"> <!-- ROW -->
+                        <div class="col-md-8">
+                            <div class="card" style="padding-bottom: 20px; margin-bottom: 30px;">
                                 <div class="card-header">
-                                    <h5 class="card-category">Penggunaan per jam</h5>
+                                    <h5 class="title">Atur Batas Daya</h5>
                                 </div>
                                 <div class="card-body">
-                                	<p style="margin-bottom: 0;">Waktu awal:</p>
-                                	<input id="date" type="date" style="width: 49%;">
-                                	<input id="time" type="time" style="width: 49%;">
-									<p style="margin-top: 30px; margin-bottom: 0;">Waktu akhir:</p>
-									<p style="margin-left: 20px; margin-top: 0; margin-bottom: 0;">1 jam setelah waktu awal</p>
+                                    <div class="typography-line">
+                                        <p>Perangkan akan menonaktifkan beban jika konsumsi daya sudah melebihi
+                                        batas yang ditentukan.</p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <label>Batas daya maksimum dalam Watt</label>
+                                            <input type="number" class="form-control" placeholder="Batas daya (Watt)">
+                                         </div>
+                                         <div class="col-md-4">
+                                            <label style="color:#fff">Simpan</label>
+                                            <button id="" class="form-control btn-info" style="">Simpan</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="card-footer">
-                                    <button id="terapkan" class="btn btn-primary btn-block" style="margin-bottom: 14px;">Terapkan</button>
-                                </div>
+                                
                             </div>
                         </div>
+                    </div> <!-- END ROW -->
 
-                        <div id="cardKurvaBebanHarian" class="col-lg-4">
-                            <div class="card card-chart">
+                    <div class="row"> <!-- ROW -->
+                        <div class="col-md-8">
+                            <div class="card" style="padding-bottom: 20px; margin-bottom: 30px;">
                                 <div class="card-header">
-                                    <h5 class="card-category">Kurva Beban Harian</h5>
+                                    <h5 class="title">Atur Batas Penggunaan Energi</h5>
                                 </div>
                                 <div class="card-body">
-                                	<p style="margin-bottom: 0;">Tanggal:</p>
-                                	<input id="dateKBH" type="date" style="width: 100%;">
-                                	<p style="margin-top: 30px; margin-bottom: 0;">Kurva beban harian biasa digunakan untuk menggambarkan pola konsumsi listrik pada satu hari tertentu.</p>
-                                </div>
-                                <div class="card-footer">
-                                    <button id="terapkanKBH" class="btn btn-primary btn-block" style="margin-bottom: 14px;">Terapkan</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="cardDayaAvg" class="col-lg-4" style="display:none;">
-                            <div class="card card-chart">
-                                <div class="card-header">
-                                    <h5 class="card-category">Konsumsi Daya Rata-Rata</h5>
-                                </div>
-                                <div class="card-body">
-                                    <center>
-                                        <h1 id="dayaAvg" class="card-title" style="margin: 0;">0</h1>
-                                    </center>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="stats">
-                                        <i class="now-ui-icons business_bulb-63"></i> Watt
+                                    <div class="typography-line">
+                                        <p>Perangkan akan menonaktifkan beban jika penggunaan energi
+                                        total sudah melebihi dari batas yang ditentukan.</p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <label>Batas energi dalam Watt.hour</label>
+                                            <input type="number" class="form-control" placeholder="Batas energi (Wh)">
+                                         </div>
+                                         <div class="col-md-4">
+                                            <label style="color:#fff">Simpan</label>
+                                            <button id="" class="form-control btn-info" style="">Simpan</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div> <!-- END ROW -->
 
-                        <div id="cardEnergiTerpakai" class="col-lg-4" style="display:none;">
-                            <div class="card card-chart">
+                    <div class="row"> <!-- ROW -->
+                        <div class="col-md-8">
+                            <div class="card" style="padding-bottom: 20px;">
                                 <div class="card-header">
-                                    <h5 class="card-category">Energi Terpakai</h5>
+                                    <h5 class="title">Hapus Akumulasi Penggunaan Energi</h5>
                                 </div>
                                 <div class="card-body">
-                                    <center>
-                                        <h1 id="energiTerpakai" class="card-title" style="margin: 0;">0</h1>
-                                    </center>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="stats">
-                                        <i class="now-ui-icons business_money-coins"></i> Watt.hour
+                                    <div class="typography-line">
+                                        <p>Menghapus penggunaan energi yang tercatat dalam satuan Watt.hour.
+                                        Riwayat konsumsi daya tidak akan terhapus.</p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <button id="buttonHapus" class="form-control btn-danger" style="">Hapus</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div> <!-- END ROW -->
             	</div>
             </div>
@@ -230,6 +195,6 @@
 		</script>
 
         <!-- Untuk Proyek Mikon -->
-        <script src="js/riwayatEnergi.js"></script>
+        <script src="js/pengaturan.js"></script>
     </body>
 </html>
