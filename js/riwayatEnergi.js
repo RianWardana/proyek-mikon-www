@@ -19,33 +19,111 @@
 
 
 
-    ////////////////////////////////////////////////////////////////////////// setup graph
-    var epochStart;
+    ////////////////////////////////////////////////////////////////////////// on button click
     document.getElementById("terapkan").onclick = function() {
-        var counter = 0;
         var date = document.getElementById("date").value;
         var time = document.getElementById("time").value;
         
         if ((date == '') || (time == '')) {
-            alert('Tidak lengkap');
+            $.notify(
+                { message: "Waktu belum dipilih." }, 
+                { type: 'warning',timer: 2000, placement: { from: 'bottom', align: 'right' } }
+            );
         } else {
-            epochStart = moment(`${date} ${time}`).unix();
+            var epochStart = moment(`${date} ${time}`).unix();
             var epochEnd = epochStart + 3600;
+            document.getElementById("cardKurvaBebanHarian").style.display = "none";
             document.getElementById("grafikPerJam").style.display = "block";
-            // document.getElementById("cardBpm").style.display = "block";
-            // document.getElementById("cardKondisi").style.display = "block";
+            document.getElementById("cardDayaAvg").style.display = "block";
+            document.getElementById("cardEnergiTerpakai").style.display = "block";
+
+            myChart.data.labels = [];
+            myChart.data.datasets[0].data = [];
 
             dayaRef.orderByKey().startAt(epochStart.toString()).endAt(epochEnd.toString()).once('value', seconds => {
+                // for (var now = epochStart; now <= epochEnd; now++) {
+                //     let power = (seconds.val()[now] ? seconds.val()[now] : 0);
+                //     myChart.data.labels.push(now);
+                //     myChart.data.datasets[0].data.push(seconds.val()[now]);
+                // }
+                
+                var counter = 0;
+                var totalDaya = 0;
+                var totalEnergi = 0;
+
                 seconds.forEach(second => {
                     myChart.data.labels.push(second.key);
                     myChart.data.datasets[0].data.push(second.val());
-                    
+                    totalDaya += Number(second.val());
+                    totalEnergi += ( Number(second.val()) / 3000 );
+                    counter++;
                 });
+
+                $("#dayaAvg").html((totalDaya/(counter == 0 ? 1 : counter)).toFixed(2));
+                $("#energiTerpakai").html(totalEnergi.toFixed(2));
                 myChart.update(0);
             });
         }
     }
 
+
+
+    ////////////////////////////////////////////////////////////////////////// on button click
+    document.getElementById("terapkanKBH").onclick = function() {
+        var date = document.getElementById("dateKBH").value;
+        
+        if (date == '') {
+            $.notify(
+                { message: "Tanggal belum dipilih." }, 
+                { type: 'warning',timer: 2000, placement: { from: 'bottom', align: 'right' } }
+            );
+        } else {
+            var epochStart = moment(date).unix();
+            var tanggal = (new Date(epochStart*1000)).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            $("#judulGrafik").html(`Kurva Beban - ${tanggal}`);
+
+            document.getElementById("grafikPerJam").style.display = "block";
+            document.getElementById("cardTimePerJam").style.display = "none";
+            document.getElementById("cardKurvaBebanHarian").style.display = "block";
+            document.getElementById("cardDayaAvg").style.display = "block";
+            document.getElementById("cardEnergiTerpakai").style.display = "block";
+
+            myChart.data.labels = [];
+            myChart.data.datasets[0].data = [];
+
+            var secondEpochStart = epochStart;
+            var secondEpochEnd = secondEpochStart + 300;
+            var minuteCount = 0;
+
+            for (minuteCount = 0; minuteCount < 288; minuteCount++) {
+                dayaRef.orderByKey().startAt(secondEpochStart.toString()).endAt(secondEpochEnd.toString()).once('value', seconds => {
+                    if (seconds.val() == null) {
+                        myChart.data.labels.push(secondEpochStart);
+                        myChart.data.datasets[0].data.push(0);  
+                    } 
+
+                    else {
+                        var count = 0;
+                        var totalDaya = 0;
+
+                        seconds.forEach(second => {
+                            totalDaya += Number(second.val());
+                            count++;
+                        });
+
+                        var dayaAvg = (totalDaya/count).toFixed(2);
+                        myChart.data.labels.push(secondEpochStart);
+                        myChart.data.datasets[0].data.push(dayaAvg);
+                    }
+                    secondEpochStart += 300;
+                });
+                secondEpochStart += 300;
+                secondEpochEnd += 300;
+            }
+
+            myChart.update(0);
+        }
+    }
 
 
 
@@ -97,11 +175,11 @@
             maintainAspectRatio: false,
             scales: {
                 yAxes: [{
-                    // ticks: {
-                    //     suggestedMin: 0,
-                    //     suggestedMax: 50,
-                    //     stepSize: 10
-                    // },
+                    ticks: {
+                        suggestedMin: 0,
+                        suggestedMax: 50,
+                        stepSize: 10
+                    },
                     display:0,
                     gridLines:0,
                     gridLines: {

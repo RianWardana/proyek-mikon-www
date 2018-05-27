@@ -116,7 +116,7 @@
             	<div class="content">
             		<div id="grafikPerJam" class="card" style="display:none;">
                         <div class="card-header">
-                            <h4 class="card-title">Penggunaan energi selama 1 jam</h4>
+                            <h4 id="judulGrafik" class="card-title">Konsumsi daya selama 1 jam</h4>
                         </div>
                         <div style="overflow-x: auto">
                         	<div class="card-body" style="padding: 0px; height: 300px; width: 3000px;">
@@ -125,7 +125,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div id="cardTimePerJam" class="col-lg-4">
                             <div class="card card-chart">
                                 <div class="card-header">
                                     <h5 class="card-category">Penggunaan per jam</h5>
@@ -142,40 +142,59 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="cardBpm" class="col-lg-4" style="display:none;">
+
+                        <div id="cardKurvaBebanHarian" class="col-lg-4">
                             <div class="card card-chart">
                                 <div class="card-header">
-                                    <h5 class="card-category">Denyut Jantung Rata-Rata</h5>
+                                    <h5 class="card-category">Kurva Beban Harian</h5>
+                                </div>
+                                <div class="card-body">
+                                	<p style="margin-bottom: 0;">Tanggal:</p>
+                                	<input id="dateKBH" type="date" style="width: 100%;">
+                                	<p style="margin-top: 30px; margin-bottom: 0;">Kurva beban harian biasa digunakan untuk menggambarkan pola konsumsi listrik pada satu hari tertentu.</p>
+                                </div>
+                                <div class="card-footer">
+                                    <button id="terapkanKBH" class="btn btn-primary btn-block" style="margin-bottom: 14px;">Terapkan</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="cardDayaAvg" class="col-lg-4" style="display:none;">
+                            <div class="card card-chart">
+                                <div class="card-header">
+                                    <h5 class="card-category">Konsumsi Daya Rata-Rata</h5>
                                 </div>
                                 <div class="card-body">
                                     <center>
-                                        <h1 id="denyut" class="card-title" style="margin: 0;">0</h1>
+                                        <h1 id="dayaAvg" class="card-title" style="margin: 0;">0</h1>
                                     </center>
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="now-ui-icons ui-2_favourite-28"></i> BPM
+                                        <i class="now-ui-icons business_bulb-63"></i> Watt
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div id="cardKondisi" class="col-lg-4" style="display:none;">
+
+                        <div id="cardEnergiTerpakai" class="col-lg-4" style="display:none;">
                             <div class="card card-chart">
                                 <div class="card-header">
-                                    <h5 class="card-category">Kondisi</h5>
+                                    <h5 class="card-category">Energi Terpakai</h5>
                                 </div>
                                 <div class="card-body">
-                                    <center id="kondisi">
-                                        <h1 class="card-title" style="margin: 0;"><i class="now-ui-icons emoticons_satisfied"></i></h1>
+                                    <center>
+                                        <h1 id="energiTerpakai" class="card-title" style="margin: 0;">0</h1>
                                     </center>
                                 </div>
                                 <div class="card-footer">
-                                    <div class="stats" id="kondisiStatus">
-                                        <i class="now-ui-icons ui-2_like"></i> Normal
+                                    <div class="stats">
+                                        <i class="now-ui-icons business_money-coins"></i> Watt.hour
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div> <!-- END ROW -->
             	</div>
             </div>
@@ -191,6 +210,7 @@
         <script src="js/jquery.min.js"></script>
         <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script src="js/bootstrap-notify.min.js"></script>
         <script src="js/perfect-scrollbar.jquery.min.js"></script>
         <script src="js/now-ui-dashboard.min.js?v=1.0.1"></script>
 		
