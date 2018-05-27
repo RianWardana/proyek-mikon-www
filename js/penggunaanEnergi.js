@@ -6,6 +6,25 @@
 
     var signalData = [];
 
+
+
+    ////////////////////////////////////////////////////////////////////////// setup database
+    var config = {
+        apiKey: "AIzaSyAi2CvFxsApe8Kf21RDD_XuXGLm2egtQXw",
+        authDomain: "proyek-mikon.firebaseapp.com",
+        databaseURL: "https://proyek-mikon.firebaseio.com",
+        projectId: "proyek-mikon",
+        storageBucket: "proyek-mikon.appspot.com",
+        messagingSenderId: "361165341127"
+    };
+
+    firebase.initializeApp(config);
+    var energiRef = firebase.database().ref('energi');
+
+    energiRef.on('value', data => {
+        $("#energi").html(data.val());
+    });
+
     
 
     ////////////////////////////////////////////////////////////////////////// setup MQTT
@@ -39,11 +58,17 @@
                 tombolNyalakan.style.display = 'none';
                 tombolMatikan.style.display = 'block';
                 $("#tombolMatikan").removeClass('disabled');
+                state.innerHTML = 'ON';
+                $("#state").addClass('on');
+                $("#state").removeClass('off');
             } 
             else if (payload == 0) {
                 tombolNyalakan.style.display = 'block';
                 tombolMatikan.style.display = 'none';
                 $("#tombolNyalakan").removeClass('disabled');
+                state.innerHTML = 'OFF';
+                $("#state").addClass('off');
+                $("#state").removeClass('on');
             }
         }
     }
@@ -73,6 +98,7 @@
             { type: 'danger',timer: 2000, placement: { from: 'bottom', align: 'right' } }
         );
         status = "offline";
+        state.innerHTML = '';
     }
 
     var setDeviceOnline = function() {
@@ -141,7 +167,12 @@
             },
             scales: {
                 yAxes: [{
-                    display: false
+                    display: true,
+                    ticks: {
+                        suggestedMin: 0,
+                        suggestedMax: 50,
+                        stepSize: 10
+                    }
                 }],
                 xAxes: [{
                     gridLines: {display: false},
@@ -155,10 +186,10 @@
             },
             plugins: {
                 streaming: {
-                    refresh: 375,
+                    refresh: 1000,
                     duration: 30000,
                     frameRate: 30,
-                    delay: 600,
+                    delay: 1300,
                     onRefresh: function(chart) {
                         let watts = signalData.pop();
                         chart.data.datasets[0].data.push({
