@@ -4,7 +4,7 @@
         <meta charset='utf-8'>
         <meta http-equiv='X-UA-Compatible' content='IE=edge'>
         <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
-        <title>Hart ECG: Riwayat</title>
+        <title>Proyek Mikrokontroler: Riwayat</title>
         <meta name="theme-color" content="#1A385B">
 
 		<!-- CSS -->
@@ -42,23 +42,18 @@
     	<div class="wrapper">
     		<div class="sidebar" data-color="orange">
                 <div class="logo">
-                    <a href="" class="simple-text logo-normal" style="margin-left:30px;">Hart ECG</a>
+                    <a href="" class="simple-text logo-normal" style="margin-left:30px;">Proyek Mikrokontroler</a>
                 </div>
                 <div class="sidebar-wrapper">
                     <ul class="nav">
                         <li>
                             <a href="index.html">
-                                <i class="now-ui-icons media-2_sound-wave"></i><p>Elektrokardiogram</p>
+                                <i class="now-ui-icons business_bulb-63"></i><p>Penggunaan Energi</p>
                             </a>
                         </li>
                         <li class="active">
                             <a href="">
-                                <i class="now-ui-icons business_briefcase-24"></i><p>Riwayat</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="now-ui-icons ui-2_chat-round"></i><p>Hubungi Dokter</p>
+                                <i class="now-ui-icons media-2_sound-wave"></i><p>Riwayat</p>
                             </a>
                         </li>
                         <li>
@@ -113,15 +108,15 @@
 
             	<div class="panel-header">
             	    <div class="header text-center">
-            	        <h2 class="title">Riwayat Jantung</h2>
-            	        <p class="category">Riwayat aktivitas jantung sebagai indikator kesehatan anda</p>
+            	        <h2 class="title">Riwayat Penggunaan Energi</h2>
+            	        <p class="category">Data penggunaan energi berdasarkan waktu</p>
             	    </div>
             	</div>
 
             	<div class="content">
             		<div id="elektrokardiogram" class="card" style="display:none;">
                         <div class="card-header">
-                            <h4 class="card-title">Elektrokardiogram (Rentang 5 Menit)</h4>
+                            <h4 class="card-title">Penggunaan energi selama 1 jam</h4>
                         </div>
                         <div style="overflow-x: auto">
                         	<div class="card-body" style="padding: 0; height: 300px; width: 30000px;">
@@ -133,14 +128,14 @@
                         <div class="col-lg-4">
                             <div class="card card-chart">
                                 <div class="card-header">
-                                    <h5 class="card-category">Rentang Waktu</h5>
+                                    <h5 class="card-category">Penggunaan per jam</h5>
                                 </div>
                                 <div class="card-body">
                                 	<p style="margin-bottom: 0;">Waktu awal:</p>
                                 	<input id="date" type="date" style="width: 49%;">
                                 	<input id="time" type="time" style="width: 49%;">
 									<p style="margin-top: 30px; margin-bottom: 0;">Waktu akhir:</p>
-									<p style="margin-left: 20px; margin-top: 0; margin-bottom: 0;">5 menit setelah waktu awal</p>
+									<p style="margin-left: 20px; margin-top: 0; margin-bottom: 0;">1 jam setelah waktu awal</p>
                                 </div>
                                 <div class="card-footer">
                                     <button id="terapkan" class="btn btn-primary btn-block" style="margin-bottom: 14px;">Terapkan</button>
@@ -208,7 +203,7 @@
 		});
 		</script>
 
-        <!-- Untuk Hart ECG -->
-        <script src="js/ecg-riwayat.js"></script>
+        <!-- Untuk Proyek Mikon -->
+        <script src="js/riwayatEnergi.js"></script>
     </body>
 </html>

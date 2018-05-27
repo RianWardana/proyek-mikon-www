@@ -1,19 +1,19 @@
 (function() {
-     // $('#datetimepicker5').datetimepicker();
-     // $('#datetimepicker4').datetimepicker();
+
     ////////////////////////////////////////////////////////////////////////// setup database
     var config = {
-        apiKey: "AIzaSyBJS638LrDtlTwbRC8BZexAA4MUXR9E-hU",
-        authDomain: "hart-ecg.firebaseapp.com",
-        databaseURL: "https://hart-ecg.firebaseio.com",
-        projectId: "hart-ecg",
-        storageBucket: "hart-ecg.appspot.com",
-        messagingSenderId: "522285262446"
+        apiKey: "AIzaSyAi2CvFxsApe8Kf21RDD_XuXGLm2egtQXw",
+        authDomain: "proyek-mikon.firebaseapp.com",
+        databaseURL: "https://proyek-mikon.firebaseio.com",
+        projectId: "proyek-mikon",
+        storageBucket: "proyek-mikon.appspot.com",
+        messagingSenderId: "361165341127"
     };
+
     firebase.initializeApp(config);
     var database = firebase.database();
-    var ecgRef = database.ref('ecg');
-    var bpmRef = database.ref('bpm');
+    var dayaRef = database.ref('daya');
+    var energiRef = database.ref('energi');
 
     var signalData = [];
 
@@ -30,7 +30,7 @@
             alert('Tidak lengkap');
         } else {
             var epochStart = moment(`${date} ${time}`).unix();
-            var epochEnd = epochStart + 300;
+            var epochEnd = epochStart + 3600;
             document.getElementById("elektrokardiogram").style.display = "block";
             document.getElementById("cardBpm").style.display = "block";
             document.getElementById("cardKondisi").style.display = "block";
@@ -87,7 +87,7 @@
             labels: [],
             datasets: [{
                 data: [],
-                borderColor: "#16a085",
+                borderColor: "#000",
                 borderWidth: 2,
                 backgroundColor: gradientFill,
                 radius: 0

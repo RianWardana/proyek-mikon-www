@@ -4,25 +4,7 @@
         // signalData.unshift(Math.floor(Math.random()*99));
     }, 1000);
 
-    
-
     var signalData = [];
-
-    
-    ////////////////////////////////////////////////////////////////////////// setup database
-    // var config = {
-    //     apiKey: "AIzaSyAi2CvFxsApe8Kf21RDD_XuXGLm2egtQXw",
-    //     authDomain: "proyek-mikon.firebaseapp.com",
-    //     databaseURL: "https://proyek-mikon.firebaseio.com",
-    //     projectId: "proyek-mikon",
-    //     storageBucket: "proyek-mikon.appspot.com",
-    //     messagingSenderId: "361165341127"
-    // };
-
-    // firebase.initializeApp(config);
-    // var database = firebase.database();
-    // var dayaRef = database.ref('daya');
-    // var energiRef = database.ref('energi');
 
     
 
@@ -173,7 +155,7 @@
             },
             plugins: {
                 streaming: {
-                    refresh: 350,
+                    refresh: 375,
                     duration: 30000,
                     frameRate: 30,
                     delay: 600,
