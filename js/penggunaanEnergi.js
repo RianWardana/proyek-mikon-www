@@ -22,7 +22,7 @@
     var energiRef = firebase.database().ref('energi');
 
     energiRef.on('value', data => {
-        $("#energi").html(data.val());
+        $("#energi").html(Number(data.val()).toFixed(2));
     });
 
     
@@ -186,12 +186,13 @@
             },
             plugins: {
                 streaming: {
-                    refresh: 1000,
+                    refresh: 970,
                     duration: 30000,
                     frameRate: 30,
-                    delay: 1300,
+                    delay: 1100,
                     onRefresh: function(chart) {
                         let watts = signalData.pop();
+                        watts = (watts > 300 ? 0 : watts);
                         chart.data.datasets[0].data.push({
                             x: Date.now(),
                             y: watts
