@@ -189,7 +189,7 @@
                     refresh: 970,
                     duration: 30000,
                     frameRate: 30,
-                    delay: 1100,
+                    delay: 1000,
                     onRefresh: function(chart) {
                         let watts = signalData.pop();
                         watts = (watts > 300 ? 0 : watts);
